@@ -35,6 +35,10 @@ export const theme = {
     gray900: "#141518",
     primary: "#F83600",
     secondary: "#FE8C00",
+    light: "#ecf0f1",
+    container: "#2d2d2d",
+    text: "#fff",
+    champangne: "#bdc3c7",
   },
   fontFamily: {
     heading: ["IBM Plex Sans", "sans-serif"].join(","),
@@ -52,6 +56,18 @@ export const theme = {
     "3xl": rem(32),
     "4xl": rem(40),
     "5xl": rem(64),
+    title: '1.3rem',
+    subtitle: '1.25rem',
+    large: '1.2rem',
+    small: '0.8rem',
+  },
+  breakpoints: {
+    xs: '0',
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+    xl: '1200px',
+    xxl: '1400px',
   },
 };
 
