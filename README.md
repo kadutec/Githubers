@@ -1,5 +1,3 @@
-# Aplicação template
+# Githubers
 
-Esta é uma aplicação gerada pelo template [React básico da Dev Samurai](https://github.com/DevSamurai/cra-template-basic).
-
-Depois que criar a sua aplicação, sobrescreva este arquivo README.md utilizando as [melhores práticas](https://www.makeareadme.com/) para isso.
+O GitHubers é um aplicativo React inovador que simplifica a busca por usuários no GitHub. Se você é um desenvolvedor, gerente de projetos ou apenas um entusiasta da tecnologia, esta ferramenta intuitiva e fácil de usar irá ajudá-lo a encontrar rapidamente as pessoas certas para se conectar e colaborar em projetos interessantes.
