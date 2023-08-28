@@ -1,77 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+
+import { useParams } from 'react-router-dom';
 
 import Profile from './Profile';
 import Filter from './Filter';
 import Repositories from './repositories';
 
-import {Container, Sidebar, Main} from './styles';
+import {Loading, Container, Sidebar, Main} from './styles';
 
-import { getLangsFrom } from '../../../services/api';
+import { getRepos, getUser, getLangsFrom } from '../../../services/api';
 
 function RepositoriesPage() {
+  const { login } = useParams();
+
+  const [user, setUser] = useState();
+  const [repositories, setRepositories] = useState();
+  const [languages, setLanguages] = useState();
   const [currentLanguage, setCurrentLanguage] = useState();
+  const [loading, setLoading] = useState(true);
 
-  const user = {
-    login: "",
-    name: "Carlos Eduardo",
-    avatar_url: "https://avatars.githubusercontent.com/u/107886899?v=4",
-    followers: 3,
-    following: 2,
-    company: null,
-    blog: "",
-    location: null,
-  };
+  useEffect(() => {
+    const loadData = async () => {
+      const [userResponse, repositoriesResponse] = await Promise.all([
+        getUser(login),
+        getRepos(login)
+    ]);
+      setUser(userResponse.data);
+      setRepositories(repositoriesResponse.data);
+      setLanguages(getLangsFrom(repositoriesResponse.data));
 
-  const repositories = [
-    {
-      id: '1',
-      name: 'Repo 1',
-      description: 'Descrição',
-      html_url: '',
-      language: 'JavaScript',
-    },
-    {
-      id: '2',
-      name: 'Repo 2',
-      description: 'Descrição',
-      html_url: '',
-      language: 'c#',
-    },
-    {
-      id: '3',
-      name: 'Repo 3',
-      description: 'Descrição',
-      html_url: '',
-      language: 'PHP',
-    },
-    {
-      id: '4',
-      name: 'Repo 4',
-      description: 'Descrição',
-      html_url: '',
-      language: 'Ruby',
-    },
-    {
-      id: '5',
-      name: 'Repo 5',
-      description: 'Descrição',
-      html_url: '',
-      language: 'Java',
-    },
-    {
-      id: '6',
-      name: 'Repo 6',
-      description: 'Descrição',
-      html_url: '',
-      language: 'TypeScript',
-    },
-  ];
+      setLoading(false);
+    };
 
-  const languages = getLangsFrom(repositories);
+    loadData();
+  }, []);
 
   const onFilterClick = (language) => {
     setCurrentLanguage(language);
   };
+
+  if(loading) {
+    return <Loading>Carregando...</Loading>;
+  }
 
   return (
     <Container>
